@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  node:
+    image: node:latest
+    container_name: node_upDate
+    working_dir: /home/workspace
+    tty: true
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./node/workspace:/home/workspace
+    networks:
+      - br0
+
+  web:
+    image: nginx:latest
+    container_name: nginx_upDate
+    ports:
+      - '8080:80'
+    volumes:
+      - ./web/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - br0
+
+networks:
+  br0:
+    driver: bridge

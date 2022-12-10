@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+
   node:
     image: node:latest
     container_name: node_upDate
@@ -13,6 +14,7 @@ services:
     networks:
       upDate_network:
         ipv4_address: 172.22.0.1
+
   web:
     image: nginx:latest
     container_name: nginx_upDate

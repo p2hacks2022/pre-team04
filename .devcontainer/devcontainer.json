@@ -12,6 +12,7 @@
 		"ritwickdey.LiveServer",
 		"vincaslt.highlight-matching-tag",
 		"xabikos.JavaScriptSnippets",
-		"formulahendry.auto-rename-tag"
+		"formulahendry.auto-rename-tag",
+		"humao.rest-client"
 	]
 }

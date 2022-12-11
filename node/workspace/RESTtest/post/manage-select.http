@@ -1,0 +1,6 @@
+POST http://localhost:3000/manage/select HTTP/1.1
+content-type: application/json
+
+{
+    "selectCategory": "ダイエット"
+}

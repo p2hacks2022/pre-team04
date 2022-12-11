@@ -1,0 +1,8 @@
+POST http://localhost:3000/record/add HTTP/1.1
+content-type: application/json
+
+{
+    "goal": "10kg痩せる",
+    "doneAny": "縄跳びをした",
+    "achivementDegrees": "5％"
+}

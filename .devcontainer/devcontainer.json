@@ -1,0 +1,17 @@
+{
+	"name": "upDate",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "node",
+	"workspaceFolder": "/home/workspace",
+	"extensions": [
+		"ecmel.vscode-html-css",
+		"ionutvmi.path-autocomplete",
+		"mrmlnc.vscode-csscomb",
+		"MS-CEINTL.vscode-language-pack-ja",
+		"oderwat.indent-rainbow",
+		"ritwickdey.LiveServer",
+		"vincaslt.highlight-matching-tag",
+		"xabikos.JavaScriptSnippets",
+		"formulahendry.auto-rename-tag"
+	]
+}

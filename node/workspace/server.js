@@ -91,6 +91,8 @@ app.post('/:user/record/add', (req, res) => {
 
 // 管理画面
 app.get('/:user/manage', (req, res) => {
+    let userData = JSON.parse(fs.readFileSync(`./data/${req.params.user}.json`));
+    console.log(userData);
     res.send("This is manage page !");
     // res.render("./view/pages/manage.ejs");
 });

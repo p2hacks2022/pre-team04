@@ -1,5 +1,5 @@
 POST http://localhost:3000/login/auth/ HTTP/1.1
-content-type: application/json
+content-type: application/json; charset=UTF-8
 
 {
     "userId": "sumeshi96"

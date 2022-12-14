@@ -37,6 +37,7 @@ app.post('/addNewUser/add', (req, res) => {
         if (err) {
             throw err;
         }
+        // test用DBを使用
         const db = client.db('updateTest');
         // userIdのコレクションが存在すればエラーメッセージを返す
         // 存在しなければ新しくコレクションを作成する
@@ -44,10 +45,12 @@ app.post('/addNewUser/add', (req, res) => {
             .next(async (err, result) => {
                 if (err) throw err;
                 if (result) {
+                    // exist
                     await client.close();
                     res.header('Content-Type', 'application/json; charset=utf-8');
                     res.send(`{"message":"ユーザー「${loginUserId}」はすでに存在しています!"}`)
                 } else {
+                    // not exist
                     await db.createCollection(`${req.body.userId}`);
                     await client.close();
                     res.header('Content-Type', 'application/json; charset=utf-8');

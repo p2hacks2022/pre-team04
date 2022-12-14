@@ -1,13 +1,13 @@
 .header-wrapper {
   display: flex;
-  width: 100%;
-  height: 80px;
+  width: auto;
+  height: 70px;
 }
 
 .header-logo-container {
   background-color: #d9d9d9;
   width: 220px;
-  height: 80px;
+  height: 70px;
 }
 
 .header-navi-container {
@@ -18,22 +18,57 @@
 }
 
 .header-navi-register-box {
-  padding: 10px 30px;
+  padding: 5px 10px;
+  text-align: center;
+  width: 80px;
+  height: 40px;
+}
+
+.header-navi-register-box :hover {
+  background-color: #eeeeee;
+  border-radius: 10px;
+  opacity: 0.8;
+  transform: translate3d(0, 3px, 0);
+  transition-duration: 0.3s;
 }
 
 .header-navi-record-box {
-  padding: 10px 30px;
+  padding: 5px 10px;
+  text-align: center;
+  width: 80px;
+  height: 40px;
+}
+
+.header-navi-record-box :hover {
+  background-color: #eeeeee;
+  border-radius: 10px;
+  opacity: 0.8;
+  transform: translate3d(0, 3px, 0);
+  transition-duration: 0.3s;
 }
 
 .header-navi-manage-box {
-  padding: 10px 30px;
+  padding: 5px 10px;
+  text-align: center;
+  width: 80px;
+  height: 40px;
+}
+
+.header-navi-manage-box :hover {
+  background-color: #eeeeee;
+  border-radius: 10px;
+  opacity: 0.8;
+  transform: translate3d(0, 3px, 0);
+  transition-duration: 0.3s;
 }
 
 .home-wrapper {
   background-color: #f3fbff;
-  position: absolute;
+  margin: auto;
+  position: relative;
+  top: -50px;
   width: 100%;
-  height: 730px;
+  height: 800px;
 }
 
 .home-catchcopy-container {
@@ -42,7 +77,8 @@
   left: 50%;
   margin-right: -50%;
   position: relative;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -25%);
+  top: 50px;
   width: 500px;
   height: 60px;
 }
@@ -50,6 +86,10 @@
 .home-container {
   display: flex;
   font-size: 40px;
+  margin: 0 auto;
+  position: relative;
+  top: 70px;
+  width: 1400px;
 }
 
 .register-box {
@@ -57,6 +97,8 @@
   border-radius: 10px;
   box-shadow: -10px 0px #8dcedc;
   margin: auto;
+  position: relative;
+  top: 20px;
   text-align: center;
   width: 433px;
   height: 531px;
@@ -88,6 +130,8 @@
   border-radius: 10px;
   box-shadow: -10px 0px #c0d4ed;
   margin: auto;
+  position: relative;
+  top: 20px;
   text-align: center;
   width: 433px;
   height: 531px;
@@ -119,6 +163,8 @@
   border-radius: 10px;
   box-shadow: -10px 0px #5b6a8f;
   margin: auto;
+  position: relative;
+  top: 20px;
   text-align: center;
   width: 433px;
   height: 531px;
@@ -145,11 +191,16 @@
   color: #5b6a8f;
 }
 
+.footer-wrapper {
+  display: flex;
+}
+
 .footer-container {
   background-color: #495971;
-  bottom: 0;
+  color: #ffffff;
   position: absolute;
+  bottom: 0;
   text-align: center;
-  width: 100%;
+  width: 99%;
   height: 102px;
 }

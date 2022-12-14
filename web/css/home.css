@@ -1,0 +1,155 @@
+.header-wrapper {
+  display: flex;
+  width: 100%;
+  height: 80px;
+}
+
+.header-logo-container {
+  background-color: #d9d9d9;
+  width: 220px;
+  height: 80px;
+}
+
+.header-navi-container {
+  display: flex;
+  position: absolute;
+  height: 0px;
+  right: 20px;
+}
+
+.header-navi-register-box {
+  padding: 10px 30px;
+}
+
+.header-navi-record-box {
+  padding: 10px 30px;
+}
+
+.header-navi-manage-box {
+  padding: 10px 30px;
+}
+
+.home-wrapper {
+  background-color: #f3fbff;
+  position: absolute;
+  width: 100%;
+  height: 730px;
+}
+
+.home-catchcopy-container {
+  background: linear-gradient(transparent 50%, #f5d0a5 50%);
+  font-size: 50px;
+  left: 50%;
+  margin-right: -50%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 60px;
+}
+
+.home-container {
+  display: flex;
+  font-size: 40px;
+}
+
+.register-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: -10px 0px #8dcedc;
+  margin: auto;
+  text-align: center;
+  width: 433px;
+  height: 531px;
+}
+
+.register-button {
+  border: 5px solid;
+  border-radius: 10px;
+  color: #8dcedc;
+  font-size: 32px;
+  margin: 65px;
+  width: 302px;
+  height: 115px;
+}
+
+.register-button:hover {
+  box-shadow: none;
+  opacity: 0.8;
+  transform: translate3d(0, 5px, 0);
+  transition-duration: 0.3s;
+}
+
+.register-button-text {
+  color: #7098a0;
+}
+
+.record-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: -10px 0px #c0d4ed;
+  margin: auto;
+  text-align: center;
+  width: 433px;
+  height: 531px;
+}
+
+.record-button {
+  border: 5px solid;
+  border-radius: 10px;
+  color: #c0d4ed;
+  font-size: 32px;
+  margin: 65px;
+  width: 302px;
+  height: 115px;
+}
+
+.record-button:hover {
+  box-shadow: none;
+  opacity: 0.8;
+  transform: translate3d(0, 5px, 0);
+  transition-duration: 0.3s;
+}
+
+.record-button-text {
+  color: #7997bd;
+}
+
+.manage-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: -10px 0px #5b6a8f;
+  margin: auto;
+  text-align: center;
+  width: 433px;
+  height: 531px;
+}
+
+.manage-button {
+  border: 5px solid;
+  border-radius: 10px;
+  color: #8494cd;
+  font-size: 32px;
+  margin: 65px;
+  width: 302px;
+  height: 115px;
+}
+
+.manage-button:hover {
+  box-shadow: none;
+  opacity: 0.8;
+  transform: translate3d(0, 5px, 0);
+  transition-duration: 0.3s;
+}
+
+.manage-button-text {
+  color: #5b6a8f;
+}
+
+.footer-container {
+  background-color: #495971;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: 102px;
+}

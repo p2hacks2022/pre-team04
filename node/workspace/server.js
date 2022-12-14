@@ -1,8 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 const app = express();
 const port = 3000;
+
+//dbアクセスの可否確認
+MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, db) => {
+    if (err) {
+        throw err;
+    }
+    // 接続できれば接続成功を返す
+    console.log("Connecting MongoDB !");
+});
 
 app.use(bodyParser.json());
 
@@ -22,19 +32,29 @@ app.get('/addNewUser', (req, res) => {
 
 // ユーザーの新規登録
 app.post('/addNewUser/add', (req, res) => {
-    let addingUserId = req.body.userId;
-    if (!(fs.existsSync(`./data/${addingUserId}.json`))) {
-        fs.writeFileSync(`./data/${addingUserId}.json`, `{"userId": "${addingUserId}"}`, (err) => {
-            if (err) {
-                throw err;
-            };
-        });
-        res.header('Content-Type', 'application/json; charset=utf-8');
-        res.send(`{"message":"ユーザー「${addingUserId}」を登録しました！"}`);
-    } else {
-        res.header('Content-Type', 'application/json; charset=utf-8');
-        res.send(`{"message":"ユーザー「${addingUserId}」はすでに存在しています！"}`);
-    }
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
+        // 接続できなければエラーを返す
+        if (err) {
+            throw err;
+        }
+        const db = client.db('updateTest');
+        // userIdのコレクションが存在すればエラーメッセージを返す
+        // 存在しなければ新しくコレクションを作成する
+        db.listCollections({ name: req.body.userId })
+            .next(async (err, result) => {
+                if (err) throw err;
+                if (result) {
+                    await client.close();
+                    res.header('Content-Type', 'application/json; charset=utf-8');
+                    res.send(`{"message":"ユーザー「${loginUserId}」はすでに存在しています!"}`)
+                } else {
+                    await db.createCollection(`${req.body.userId}`);
+                    await client.close();
+                    res.header('Content-Type', 'application/json; charset=utf-8');
+                    res.send(`{"message":"ユーザー「${loginUserId}」は登録しました！"}`)
+                }
+            });
+    });
 });
 
 // ログイン認証

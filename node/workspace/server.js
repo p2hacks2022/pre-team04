@@ -59,24 +59,37 @@ app.post('/addNewUser/add', (req, res) => {
 
 // ログイン認証
 app.post('/login/auth', (req, res) => {
-    let loginUserId = req.body.userId;
-    // ユーザーネームのjsonファイルが存在すればユーザのホームへリダイレクト
-    // ユーザーネームのjsonファイルが存在しなければエラーメッセージを返す
-    if (fs.existsSync(`./data/${loginUserId}.json`)) {
-        // リダイレクト先のパス
-        // フルパスにすべきかこのままにするかわからない
-        let redirectPath = `${loginUserId}/home`;
-        res.redirect(301, redirectPath);
-    } else {
-        // /login/authへエラーメッセージを送信
-        res.header('Content-Type', 'application/json; charset=utf-8');
-        res.send(`{"message":"ユーザー「${loginUserId}」は存在しません!"}`)
-    }
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
+        // 接続できなければエラーを返す
+        if (err) {
+            throw err;
+        }
+        // test用DBを使用
+        const db = client.db('updateTest');
+        // userIdのコレクションが存在すれば/userId/homeへリダイレクト
+        // 存在しなければエラー文を返す
+        db.listCollections({ name: req.body.userId })
+            .next(async (err, result) => {
+                if (err) throw err;
+                let loginUserId = req.body.userId;
+                if (result) {
+                    // exist
+                    await client.close();
+                    let redirectPath = `${loginUserId}/home`;
+                    res.redirect(301, redirectPath);
+                } else {
+                    // not exist
+                    await client.close();
+                    res.header('Content-Type', 'application/json; charset=utf-8');
+                    res.send(`{"message":"ユーザー「${loginUserId}」は存在しません！"} `)
+                }
+            });
+    });
 });
 
 
 app.get('/:user/home', (req, res) => {
-    res.send(`This is ${req.params.user} home page !`);
+    res.send(`This is ${req.params.user} home page!`);
 });
 
 app.get('/:user/register', (req, res) => {
@@ -84,7 +97,7 @@ app.get('/:user/register', (req, res) => {
 });
 
 app.post('/:user/register/add', (req, res) => {
-    res.send(`${req.body.goal},${req.body.newCategory},${req.body.selectCategory}`);
+    res.send(`${req.body.goal},${req.body.newCategory},${req.body.selectCategory} `);
     // userのjsonに追加する
 });
 
@@ -93,7 +106,7 @@ app.get('/:user/record', (req, res) => {
 });
 
 app.post('/:user/record/add', (req, res) => {
-    res.send(`${req.body.goal},${req.body.doneAny},${req.body.achivementDegrees}`);
+    res.send(`${req.body.goal},${req.body.doneAny},${req.body.achivementDegrees} `);
     // userのjsonに追加する
 });
 
@@ -102,10 +115,10 @@ app.get('/:user/manage', (req, res) => {
 });
 
 app.post('/:user/manage/select', (req, res) => {
-    res.send(`${req.body.selectCategory}`);
+    res.send(`${req.body.selectCategory} `);
     // userのjsonをカテゴリを絞って表示する
 });
 
 app.listen(port, () => {
-    console.log(`upDate listening on port ${port}`);
+    console.log(`upDate listening on port ${port} `);
 });

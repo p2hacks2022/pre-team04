@@ -125,11 +125,11 @@ app.post('/:user/register/add', async (req, res) => {
         const db = client.db('updateTest');
         const collection = db.collection(req.params.user);
         // 最初のObjectを取得してきてその中のgoalListに目標とカテゴリを追加していく
-        collection.find({}).toArray(async (err, result) => {
+        collection.find({}).next(async (err, result) => {
             if (err) throw err;
             //console.log(result[0]._id); //最初のObjectのID
             await collection.updateOne(
-                { _id: result[0]._id },
+                { _id: result._id },
                 { $addToSet: { "goalList": { "goal": goal, "category": category } } }
             );
             await client.close();

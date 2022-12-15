@@ -113,19 +113,17 @@ app.get('/:user/register', (req, res) => {
 
 // 登録機能
 app.post('/:user/register/add', async (req, res) => {
+    // リクエストから変数を抽出
+    let goal = req.body.goal;
+    let newCategory = req.body.newCategory;
+    let selectCategory = req.body.selectCategory;
+    // 文字列が空白ではない方を採用
+    let category = newCategory || selectCategory;
     // mongoにアクセスする
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
         if (err) throw err;
-
         const db = client.db('updateTest');
         const collection = db.collection(req.params.user);
-        // goalをリクエストから抽出
-        let goal = req.body.goal;
-        // categoryをリクエストから抽出
-        let newCategory = req.body.newCategory;
-        let selectCategory = req.body.selectCategory;
-        // 文字列が空白ではない方を採用
-        let category = newCategory || selectCategory;
         // 最初のObjectを取得してきてその中のgoalListに目標とカテゴリを追加していく
         collection.find({}).toArray(async (err, result) => {
             if (err) throw err;
@@ -137,7 +135,7 @@ app.post('/:user/register/add', async (req, res) => {
             await client.close();
         });
     });
-    res.send(`カテゴリ${category}の目標：${req.body.goal}を登録しました！`);
+    res.send(`カテゴリ${category}の目標：${goal}を登録しました！`);
 });
 
 // 記録画面

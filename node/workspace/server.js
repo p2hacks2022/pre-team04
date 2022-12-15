@@ -132,7 +132,8 @@ app.post('/:user/register/add', async (req, res) => {
             //console.log(result[0]._id); //最初のObjectのID
             await collection.updateOne(
                 { _id: result[0]._id },
-                { $addToSet: { "goalList": { "goal": goal, "category": category } } });
+                { $addToSet: { "goalList": { "goal": goal, "category": category } } }
+            );
             await client.close();
         });
     });
@@ -146,8 +147,27 @@ app.get('/:user/record', (req, res) => {
 
 // 記録機能
 app.post('/:user/record/add', (req, res) => {
-    res.send(`${req.body.goal},${req.body.doneAny},${req.body.achivementDegrees} `);
-    // userのjsonに追加する
+    // リクエストから変数を取得
+    let goal = req.body.goal;
+    let doneAny = req.body.doneAny;
+    let achivementDegrees = req.body.achivementDegrees;
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
+        if (err) throw err;
+        const db = client.db('updateTest');
+        const collection = db.collection(req.params.user);
+        // goalが検索条件と一致するドキュメントに達成度としたことを追加していく
+        collection.find({}).next(async (err, result) => {
+            if (err) throw err;
+            await collection.updateOne(
+                { "_id": result._id },
+                { $addToSet: { "goalList.$[element].doneAny": doneAny, "goalList.$[element].achivementDegrees": achivementDegrees } },
+                { arrayFilters: [{ "element.goal": goal }] }
+            );
+            await client.close();
+        });
+    });
+    res.header('Content-Type', 'application/json; charset=utf-8'); achivementDegrees
+    res.send(`{"message":"以下のデータを記録しました！"},{"goal":${goal}},{"doneAny":${doneAny}},{"achivementDegrees":${achivementDegrees}}`);
 });
 
 // 管理画面

@@ -16,56 +16,17 @@ MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
 
 app.use(bodyParser.json());
 
+// レンダリングエンジンをejsに設定
 app.set('view engine', 'ejs');
 
+// ルートはログイン画面へリダイレクト
 app.get('/', (req, res) => {
     res.redirect(301, '/login');
 });
 
+// ログイン画面
 app.get('/login', (req, res) => {
     res.send("This is login page !");
-});
-
-app.get('/addNewUser', (req, res) => {
-    res.send("This is newUser page!");
-});
-
-// ユーザーの新規登録機能
-app.post('/addNewUser/add', (req, res) => {
-    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
-        // 接続できなければエラーを返す
-        if (err) {
-            throw err;
-        }
-        // test用DBを使用
-        const db = client.db('updateTest');
-        // userIdのコレクションが存在すればエラーメッセージを返す
-        // 存在しなければ新しくコレクションを作成する
-        db.listCollections({ name: req.body.userId })
-            .next(async (err, result) => {
-                if (err) throw err;
-                let loginUserId = req.body.userId;
-                if (result) {
-                    // exist
-                    await client.close();
-                    res.header('Content-Type', 'application/json; charset=utf-8');
-                    res.send(`{"message":"ユーザー「${loginUserId}」はすでに存在しています!"}`)
-                } else {
-                    // not exist
-                    await db.createCollection(req.body.userId);
-                    // categoryListオブジェクトを持たせる
-                    const collection = db.collection(req.body.userId);
-                    await collection.insertOne({
-                        "goalList": [
-
-                        ]
-                    });
-                    await client.close();
-                    res.header('Content-Type', 'application/json; charset=utf-8');
-                    res.send(`{"message":"ユーザー「${loginUserId}」を登録しました！"}`)
-                }
-            });
-    });
 });
 
 // ログイン認証機能
@@ -98,11 +59,54 @@ app.post('/login/auth', (req, res) => {
     });
 });
 
+// ユーザの新規登録画面
+app.get('/addNewUser', (req, res) => {
+    res.send("This is newUser page!");
+});
 
+// ユーザの新規登録機能
+app.post('/addNewUser/add', (req, res) => {
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
+        // 接続できなければエラーを返す
+        if (err) {
+            throw err;
+        }
+        // test用DBを使用
+        const db = client.db('updateTest');
+        // userIdのコレクションが存在すればエラーメッセージを返す
+        // 存在しなければ新しくコレクションを作成する
+        db.listCollections({ name: req.body.userId })
+            .next(async (err, result) => {
+                if (err) throw err;
+                let loginUserId = req.body.userId;
+                if (result) {
+                    // exist
+                    await client.close();
+                    res.header('Content-Type', 'application/json; charset=utf-8');
+                    res.send(`{"message":"ユーザー「${loginUserId}」はすでに存在しています!"}`)
+                } else {
+                    // not exist
+                    await db.createCollection(req.body.userId);
+                    const collection = db.collection(req.body.userId);
+                    await collection.insertOne({
+                        "goalList": [
+
+                        ]
+                    });
+                    await client.close();
+                    res.header('Content-Type', 'application/json; charset=utf-8');
+                    res.send(`{"message":"ユーザー「${loginUserId}」を登録しました！"}`)
+                }
+            });
+    });
+});
+
+// ユーザのホーム画面
 app.get('/:user/home', (req, res) => {
     res.send(`This is ${req.params.user} home page!`);
 });
 
+// ユーザの登録画面
 app.get('/:user/register', (req, res) => {
     res.send("This is register page !");
 });
@@ -135,19 +139,23 @@ app.post('/:user/register/add', async (req, res) => {
     res.send(`カテゴリ${category}の目標：${req.body.goal}を登録しました！`);
 });
 
+// 記録画面
 app.get('/:user/record', (req, res) => {
     res.send("This is record page !");
 });
 
+// 記録機能
 app.post('/:user/record/add', (req, res) => {
     res.send(`${req.body.goal},${req.body.doneAny},${req.body.achivementDegrees} `);
     // userのjsonに追加する
 });
 
+// 管理画面
 app.get('/:user/manage', (req, res) => {
     res.send("This is manage page !");
 });
 
+// カテゴリ選択機能
 app.post('/:user/manage/select', (req, res) => {
     res.send(`${req.body.selectCategory} `);
     // userのjsonをカテゴリを絞って表示する

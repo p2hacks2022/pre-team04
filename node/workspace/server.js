@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 //dbアクセスの可否確認
-MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, db) => {
+MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
     if (err) {
         throw err;
     }
@@ -30,7 +30,7 @@ app.get('/addNewUser', (req, res) => {
     res.send("This is newUser page!");
 });
 
-// ユーザーの新規登録
+// ユーザーの新規登録機能
 app.post('/addNewUser/add', (req, res) => {
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
         // 接続できなければエラーを返す
@@ -44,6 +44,7 @@ app.post('/addNewUser/add', (req, res) => {
         db.listCollections({ name: req.body.userId })
             .next(async (err, result) => {
                 if (err) throw err;
+                let loginUserId = req.body.userId;
                 if (result) {
                     // exist
                     await client.close();
@@ -51,16 +52,23 @@ app.post('/addNewUser/add', (req, res) => {
                     res.send(`{"message":"ユーザー「${loginUserId}」はすでに存在しています!"}`)
                 } else {
                     // not exist
-                    await db.createCollection(`${req.body.userId}`);
+                    await db.createCollection(req.body.userId);
+                    // categoryListオブジェクトを持たせる
+                    const collection = db.collection(req.body.userId);
+                    await collection.insertOne({
+                        "goalList": [
+
+                        ]
+                    });
                     await client.close();
                     res.header('Content-Type', 'application/json; charset=utf-8');
-                    res.send(`{"message":"ユーザー「${loginUserId}」は登録しました！"}`)
+                    res.send(`{"message":"ユーザー「${loginUserId}」を登録しました！"}`)
                 }
             });
     });
 });
 
-// ログイン認証
+// ログイン認証機能
 app.post('/login/auth', (req, res) => {
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
         // 接続できなければエラーを返す
@@ -99,9 +107,32 @@ app.get('/:user/register', (req, res) => {
     res.send("This is register page !");
 });
 
-app.post('/:user/register/add', (req, res) => {
-    res.send(`${req.body.goal},${req.body.newCategory},${req.body.selectCategory} `);
-    // userのjsonに追加する
+// 登録機能
+app.post('/:user/register/add', async (req, res) => {
+    // mongoにアクセスする
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
+        if (err) throw err;
+
+        const db = client.db('updateTest');
+        const collection = db.collection(req.params.user);
+        // goalをリクエストから抽出
+        let goal = req.body.goal;
+        // categoryをリクエストから抽出
+        let newCategory = req.body.newCategory;
+        let selectCategory = req.body.selectCategory;
+        // 文字列が空白ではない方を採用
+        let category = newCategory || selectCategory;
+        // 最初のObjectを取得してきてその中のgoalListに目標とカテゴリを追加していく
+        collection.find({}).toArray(async (err, result) => {
+            if (err) throw err;
+            //console.log(result[0]._id); //最初のObjectのID
+            await collection.updateOne(
+                { _id: result[0]._id },
+                { $addToSet: { "goalList": { "goal": goal, "category": category } } });
+            await client.close();
+        });
+    });
+    res.send(`カテゴリ${category}の目標：${req.body.goal}を登録しました！`);
 });
 
 app.get('/:user/record', (req, res) => {

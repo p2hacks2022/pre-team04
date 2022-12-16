@@ -86,13 +86,8 @@ app.post('/addNewUser/add', (req, res) => {
                     res.send(`{"message":"ユーザー「${loginUserId}」はすでに存在しています!"}`)
                 } else {
                     // not exist
+                    //コレクションを作る
                     await db.createCollection(req.body.userId);
-                    const collection = db.collection(req.body.userId);
-                    await collection.insertOne({
-                        "goalList": [
-
-                        ]
-                    });
                     await client.close();
                     res.header('Content-Type', 'application/json; charset=utf-8');
                     res.send(`{"message":"ユーザー「${loginUserId}」を登録しました！"}`)
@@ -120,20 +115,17 @@ app.post('/:user/register/add', async (req, res) => {
     // 文字列が空白ではない方を採用
     let category = newCategory || selectCategory;
     // mongoにアクセスする
-    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
         if (err) throw err;
         const db = client.db('updateTest');
-        const collection = db.collection(req.params.user);
+        let collection = db.collection(req.params.user);
         // 最初のObjectを取得してきてその中のgoalListに目標とカテゴリを追加していく
-        collection.find({}).next(async (err, result) => {
-            if (err) throw err;
-            //console.log(result[0]._id); //最初のObjectのID
-            await collection.updateOne(
-                { _id: result._id },
-                { $addToSet: { "goalList": { "goal": goal, "category": category } } }
-            );
-            await client.close();
-        });
+        await collection.findOneAndUpdate(
+            { "goal": goal },
+            { $set: { "goal": goal, "category": category } },
+            { upsert: true }
+        );
+        await client.close();
     });
     res.send(`カテゴリ${category}の目標：${goal}を登録しました！`);
 });
@@ -152,17 +144,13 @@ app.post('/:user/record/add', (req, res) => {
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
         if (err) throw err;
         const db = client.db('updateTest');
-        const collection = db.collection(req.params.user);
+        let collection = db.collection(req.params.user);
         // goalが検索条件と一致するドキュメントに達成度としたことを追加していく
-        collection.find({}).next(async (err, result) => {
-            if (err) throw err;
-            await collection.updateOne(
-                { "_id": result._id },
-                { $addToSet: { "goalList.$[element].doneAny": doneAny, "goalList.$[element].achivementDegrees": achivementDegrees } },
-                { arrayFilters: [{ "element.goal": goal }] }
-            );
-            await client.close();
-        });
+        await collection.updateOne(
+            { "goal": goal },
+            { $addToSet: { "doneAny": doneAny, "achivementDegrees": achivementDegrees } }
+        );
+        await client.close();
     });
     res.header('Content-Type', 'application/json; charset=utf-8'); achivementDegrees
     res.send(`{"message":"以下のデータを記録しました！"},{"goal":${goal}},{"doneAny":${doneAny}},{"achivementDegrees":${achivementDegrees}}`);
@@ -170,13 +158,50 @@ app.post('/:user/record/add', (req, res) => {
 
 // 管理画面
 app.get('/:user/manage', (req, res) => {
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
+        if (err) throw err;
+
+        const db = client.db("updateTest");
+        let collection = db.collection(req.params.user);
+        console.log("cursoleのまえ");
+        // カテゴリが一致するドキュメント一覧を取得
+        let cursole = collection.find({}, { projection: { _id: 0, goal: 1, category: 1, achivementDegrees: 1, doneAny: 1 } });
+        // 取得したドキュメントを配列としてJSON形式でレスポンスする。
+        console.log("cursoleのあと");
+        cursole.toArray((err, result) => {
+            if (err) throw err;
+            console.log(result);
+            let resultsJson = JSON.stringify(result);
+            console.log(resultsJson);
+            client.close();
+            // フィルターかけた結果をjsonで返す
+            //res.send(`${resultsJson} `);
+        });
+    });
     res.send("This is manage page !");
 });
 
 // カテゴリ選択機能
 app.post('/:user/manage/select', (req, res) => {
-    res.send(`${req.body.selectCategory} `);
-    // userのjsonをカテゴリを絞って表示する
+    let category = req.body.selectCategory;
+    console.log(category);
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
+        if (err) throw err;
+        const db = client.db("updateTest");
+        let collection = db.collection(req.params.user);
+
+        // カテゴリが一致するドキュメント一覧を取得
+        let cursole = collection.find({ "category": category }, { projection: { _id: 0, goal: 1, category: 1, achivementDegrees: 1, doneAny: 1 } });
+        // 取得したドキュメントを配列としてJSON形式でレスポンスする。
+        cursole.toArray((err, result) => {
+            if (err) throw err;
+            let resultsJson = JSON.stringify(result);
+            client.close();
+            // フィルターかけた結果をjsonで返す
+            res.send(`${resultsJson} `);
+        });
+
+    });
 });
 
 app.listen(port, () => {

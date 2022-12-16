@@ -1,8 +1,8 @@
-POST http://localhost:3000/register/add HTTP/1.1
+POST http://localhost:3000/unko80/register/add HTTP/1.1
 content-type: application/json; charset=UTF-8
 
 {
-    "goal": "10kg痩せる",
-    "newCategory": "ダイエット",
+    "goal": "unkoでた",
+    "newCategory": "衛生",
     "selectCategory": ""
 }

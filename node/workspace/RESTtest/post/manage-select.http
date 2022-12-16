@@ -1,6 +1,6 @@
-POST http://localhost:3000/manage/select HTTP/1.1
+POST http://localhost:3000/unko80/manage/select HTTP/1.1
 content-type: application/json; charset=UTF-8
 
 {
-    "selectCategory": "ダイエット"
+    "selectCategory": "衛生"
 }

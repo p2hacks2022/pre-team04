@@ -2,5 +2,5 @@ POST http://localhost:3000/addNewUser/add HTTP/1.1
 content-type: application/json; charset=UTF-8
 
 {
-    "userId": "unko55"
+    "userId": "unko80"
 }

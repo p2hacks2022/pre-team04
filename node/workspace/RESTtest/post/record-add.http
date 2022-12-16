@@ -1,8 +1,8 @@
-POST http://localhost:3000/record/add HTTP/1.1
+POST http://localhost:3000/unko80/record/add HTTP/1.1
 content-type: application/json; charset=UTF-8
 
 {
-    "goal": "10kg痩せる",
-    "doneAny": "縄跳びをした",
-    "achivementDegrees": "5％"
+    "goal": "unkoでた",
+    "doneAny": "ズボンを下ろす",
+    "achivementDegrees": "0.5"
 }

@@ -1,3 +1,8 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .header-wrapper {
   display: flex;
   width: auto;
@@ -212,14 +217,14 @@
 }
 
 .footer-wrapper {
+  margin-top: auto;
   display: flex;
 }
 
 .footer-container {
   background-color: #495971;
   color: #ffffff;
-  position: absolute;
-  bottom: 0;
+  margin-top: -102px;
   text-align: center;
   width: 99%;
   height: 102px;

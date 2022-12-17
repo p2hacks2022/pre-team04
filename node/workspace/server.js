@@ -111,8 +111,16 @@ app.get('/:user/home', (req, res) => {
 
 // ユーザの登録画面
 app.get('/:user/register', (req, res) => {
-    // res.send("This is register page !");
-    res.render("pages/register.ejs");
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
+        if (err) throw err;
+        const db = client.db('updateTest');
+        let collection = db.collection(req.params.user);
+        await collection.distinct("category", (err, result) => {
+            console.log(result);
+            client.close();
+            res.render("pages/register.ejs"/*,result*/);
+        });
+    });
 });
 
 // 登録機能
@@ -141,7 +149,16 @@ app.post('/:user/register/add', async (req, res) => {
 
 // 記録画面
 app.get('/:user/record', (req, res) => {
-    res.render("pages/record.ejs");
+    MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
+        if (err) throw err;
+        const db = client.db('updateTest');
+        let collection = db.collection(req.params.user);
+        await collection.distinct("goal", (err, result) => {
+            console.log(result);
+            client.close();
+            res.render("pages/record.ejs"/*,result*/);
+        });
+    });
     // res.send("This is record page !");
 });
 

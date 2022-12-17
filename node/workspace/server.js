@@ -15,6 +15,8 @@ MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
 });
 
 app.use(bodyParser.json());
+// views以下のディレクトリをexpressに公開
+app.use(express.static(__dirname + '/views'));
 
 // レンダリングエンジンをejsに設定
 app.set('view engine', 'ejs');
@@ -32,11 +34,13 @@ app.get('/login', (req, res) => {
 
 // ログイン認証機能
 app.post('/login/auth', (req, res) => {
+    console.log(req);
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
         // 接続できなければエラーを返す
         if (err) {
             throw err;
         }
+        console.log(req.body.userId);
         // test用DBを使用
         const db = client.db('updateTest');
         // userIdのコレクションが存在すれば/userId/homeへリダイレクト
@@ -45,6 +49,8 @@ app.post('/login/auth', (req, res) => {
             .next(async (err, result) => {
                 if (err) throw err;
                 let loginUserId = req.body.userId;
+                console.log(req.body.userId);
+                console.log(loginUserId);
                 if (result) {
                     // exist
                     await client.close();

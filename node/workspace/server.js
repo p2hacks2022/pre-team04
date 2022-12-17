@@ -173,21 +173,17 @@ app.get('/:user/manage', (req, res) => {
 
         const db = client.db("updateTest");
         let collection = db.collection(req.params.user);
-        console.log("cursoleのまえ");
         // カテゴリが一致するドキュメント一覧を取得
         let cursole = collection.find({}, { projection: { _id: 0, goal: 1, category: 1, achivementDegrees: 1, doneAny: 1 } });
-        // 取得したドキュメントを配列としてJSON形式でレスポンスする。
-        console.log("cursoleのあと");
+        // 取得したドキュメントを配列としてJSON形式でレスポンスする
         cursole.toArray((err, result) => {
             if (err) throw err;
-            console.log(result);
             let resultsJson = JSON.stringify(result);
-            console.log(resultsJson);
             client.close();
             // フィルターかけた結果をjsonで返す
             //res.send(`${resultsJson} `);
             // 結果をもとにmanage.ejsをレンダリング
-            res.render("pages/manage.ejs", resultsJson);
+            res.render("pages/manage.ejs"/*, resultsJson*/);
         });
     });
     // res.send("This is manage page !");
@@ -196,7 +192,6 @@ app.get('/:user/manage', (req, res) => {
 // カテゴリ選択機能
 app.post('/:user/manage/select', (req, res) => {
     let category = req.body.selectCategory;
-    console.log(category);
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
         if (err) throw err;
         const db = client.db("updateTest");
@@ -212,7 +207,7 @@ app.post('/:user/manage/select', (req, res) => {
             // フィルターかけた結果をjsonで返す
             // res.send(`${resultsJson} `);
             // フィルターをかけた結果をもとにmanage.ejsを再レンダリング
-            res.render("pages/manage.ejs", resultsJson);
+            res.render("pages/manage.ejs"/*, resultsJson*/);
         });
 
     });

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="/stylesheet/home.css">
     <title>upDate -home</title>
 </head>
 
@@ -28,7 +28,7 @@
                 <p class="register-text">
                     なんかいい感じの言葉（登録）
                 </p>
-                <div class="register-button">
+                <div class="register-button" id="registerButton">
                     <p class="register-button-text">
                         今すぐ入力する
                     </p>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- 目標の記録 -->
-            <div class="record-box">
+            <div class="record-box" id="recordButton">
                 <p class="record-text">
                     なんかいい感じの言葉（記録）
                 </p>
@@ -48,7 +48,7 @@
             </div>
 
             <!-- 目標の管理 -->
-            <div class="manage-box">
+            <div class="manage-box" id="manageButton">
                 <p class="manage-text">
                     なんかいい感じの言葉（管理）
                 </p>
@@ -67,6 +67,7 @@
         <!-- フッター -->
         <%- include('../components/footer'); %>
     </footer>
+    <script src="/script/home.js"></script>
 </body>
 
 </html>

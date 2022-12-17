@@ -26,13 +26,14 @@
             </p>
         </div>
         <div class="register-container">
-            <input class="add-target-form" type="text" name="add-target" placeholder="目標を入力">
-            <input class="add-category-form" type="text" name="add-category" placeholder="新しいカテゴリーを追加">
-            <select class="select-category-box" name="select-category">
+            <input class="add-target-form" id="addTargetForm" type="text" name="add-target" placeholder="目標を入力">
+            <input class="add-category-form" id="addCategoryForm" type="text" name="add-category"
+                placeholder="新しいカテゴリーを追加">
+            <select class="select-category-box" id="selectCategoryBox" name="select-category">
                 <option>カテゴリーを選択</option>
             </select>
         </div>
-        <div class="register-button">
+        <div class="register-button" id="registerButton">
             <p class="register-button-text">
                 登録する！
             </p>
@@ -41,12 +42,12 @@
             </p>
         </div>
         <div class="switch-menu-container">
-            <div class="back-home-button">
+            <div class="back-home-button" id="backHomeButton">
                 <p class="back-home-button-text">
                     ホームに戻る
                 </p>
             </div>
-            <div class="switch-manage-menu-button">
+            <div class="switch-manage-menu-button" id="switchManageMenuButton">
                 <p class="switch-manage-menu-button-text">
                     管理画面
                 </p>

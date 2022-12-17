@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/record.css">
+    <title>upDate -record</title>
+</head>
+
+<body>
+
+    <header>
+        <!-- ヘッダー -->
+        <%- include('../components/header'); %>
+    </header>
+
+    <div class="record-wrapper">
+        <div class="record-title-container">
+            <p class="record-title">
+                記録
+            </p>
+            <p class="record-title-text">
+                いい感じの文章いい感じの文章<br>
+                いい感じの文章いい感じの文章
+            </p>
+        </div>
+        <div class="record-container">
+            <select class="record-target-box" id="recordTargetBox" name="record-target">
+                <option>目標を選択</option>
+            </select>
+            <input class="done-any-form" id="doneAnyForm" type="text" name="done-any" placeholder="なにかをした">
+            <select class="achievement-degrees-box" id="achievementDegreesBox" name="achievement-degrees">
+                <option>達成度合いを選択</option>
+            </select>
+            <div class="record-button" id="recordButton">
+                <p class="record-button-text">
+                    記録する！
+                </p>
+            </div>
+        </div>
+        <div class="switch-menu-container">
+            <div class="back-home-button" id="backHomeButton">
+                <p class="back-home-button-text">
+                    ホームに戻る
+                </p>
+            </div>
+            <div class="switch-manage-menu-button" id="switchManageMenuButton">
+                <p class="switch-manage-menu-button-text">
+                    管理画面
+                </p>
+            </div>
+        </div>
+        <div class="record-content-display-container">
+            <img class="record-content-display" src="hogehoge.jpg">
+            <p class="record-content-display-text">
+                ここに記録内容を表示
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <!-- フッター -->
+        <%- include('../components/footer'); %>
+    </footer>
+
+</body>
+
+</html>

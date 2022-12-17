@@ -11,9 +11,12 @@ const homeRegisterButton = document.getElementById(registerButton);
 const homeRecordButton = document.getElementById(recordButton);
 const homeManageButton = document.getElementById(manageButton);
 
+let path = location.pathname.split("/");
+let userId = path[0];
+
 // logoを押下されたらhomeへ遷移
 headerLogoContainer.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    (await fetch(`http://update.com/${userId}/home`)).json
 });
 
 // naviの登録を押下されたらregisterへ遷移

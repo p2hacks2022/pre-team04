@@ -11,28 +11,7 @@
 
     <header>
         <!-- ヘッダー -->
-        <div class="header-wrapper">
-            <div class="header-logo-container" id="headerLogoButton">
-                <img class="header-logo" src="hogehoge.jpg">
-            </div>
-            <div class="header-navi-container">
-                <div class="header-navi-register-box" id="headerNaviRegisterButton">
-                    <p class="header-navi-register-text">
-                        記録
-                    </p>
-                </div>
-                <div class="header-navi-record-box" id="headerNaviRecordButton">
-                    <p class="header-navi-record-text">
-                        登録
-                    </p>
-                </div>
-                <div class="header-navi-manage-box" id="headerNaviManageButton">
-                    <p class="header-navi-manage-text">
-                        管理
-                    </p>
-                </div>
-            </div>
-        </div>
+        <%- include('../components/header'); %>
     </header>
 
     <div class="record-wrapper">
@@ -53,14 +32,14 @@
             <select class="achievement-degrees-box" name="achievement-degrees">
                 <option>達成度合いを選択</option>
             </select>
-            <div class="record-button" id="recordButton">
+            <div class="record-button">
                 <p class="record-button-text">
                     記録する！
                 </p>
             </div>
         </div>
         <div class="switch-menu-container">
-            <div class="back-home-button" id="backHomeButton">
+            <div class="back-home-button">
                 <p class="back-home-button-text">
                     ホームに戻る
                 </p>
@@ -81,14 +60,7 @@
 
     <footer>
         <!-- フッター -->
-        <div class="footer-wrapper">
-            <div class="footer-container">
-                <p class="footer-copyright">
-                    Ⓒきざみのりを刻む会
-                </p>
-                <img class="footer-logo" src="hogehoge.jpg">
-            </div>
-        </div>
+        <%- include('../components/footer'); %>
     </footer>
 
 </body>

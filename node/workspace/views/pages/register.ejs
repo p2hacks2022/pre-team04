@@ -30,7 +30,11 @@
             <input class="add-category-form" id="addCategoryForm" type="text" name="add-category"
                 placeholder="新しいカテゴリーを追加">
             <select class="select-category-box" id="selectCategoryBox" name="select-category">
-                <option>カテゴリーを選択</option>
+                <% category.forEach(function(result) { %>
+                    <option result="<%= result%>">
+                        <%= result%>
+                    </option>
+                    <% });%>
             </select>
         </div>
         <div class="register-button" id="registerButton">
@@ -54,8 +58,6 @@
             </div>
         </div>
     </div>
-
-
     <footer>
         <!-- フッター -->
         <%- include('../components/footer'); %>

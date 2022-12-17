@@ -25,26 +25,25 @@
                 いい感じの文章いい感じの文章
             </p>
         </div>
-        <div class="register-container">
-            <input class="add-target-form" id="addTargetForm" type="text" name="add-target" placeholder="目標を入力">
-            <input class="add-category-form" id="addCategoryForm" type="text" name="add-category"
-                placeholder="新しいカテゴリーを追加">
-            <select class="select-category-box" id="selectCategoryBox" name="select-category">
-                <% category.forEach(function(result) { %>
+        <form action="" method="POST">
+            <div class="register-container">
+                <input class="add-target-form" id="addTargetForm" type="text" name="goal" placeholder="目標を入力">
+                <input class="add-category-form" id="addCategoryForm" type="text" name="newCategory"
+                    placeholder="新しいカテゴリーを追加">
+                <select class="select-category-box" id="selectCategoryBox" name="selectCategory">
+                    <% category.forEach(function(result) { %>
                     <option result="<%= result%>">
                         <%= result%>
                     </option>
                     <% });%>
-            </select>
-        </div>
-        <div class="register-button" id="registerButton">
-            <p class="register-button-text">
-                登録する！
-            </p>
-            <p class="registered-massage">
-                登録しました！
-            </p>
-        </div>
+                </select>
+            </div>
+            <button class="register-button" id="registerButton">
+                <p class="register-button-text">
+                    登録する！
+                </p>
+            </button>
+        </form>
         <div class="switch-menu-container">
             <div class="back-home-button" id="backHomeButton">
                 <p class="back-home-button-text">

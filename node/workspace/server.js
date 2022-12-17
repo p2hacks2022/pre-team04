@@ -15,6 +15,8 @@ MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // views以下のディレクトリをexpressに公開
 app.use(express.static(__dirname + '/views'));
 
@@ -146,7 +148,7 @@ app.post('/:user/register/add', async (req, res) => {
         );
         await client.close();
     });
-    res.send(`カテゴリ${category}の目標：${goal}を登録しました！`);
+    res.redirect(301, `/${req.params.user}/register`);
 });
 
 // 記録画面
@@ -183,8 +185,7 @@ app.post('/:user/record/add', (req, res) => {
         );
         await client.close();
     });
-    res.header('Content-Type', 'application/json; charset=utf-8'); achivementDegrees
-    res.send(`{"message":"以下のデータを記録しました！"},{"goal":${goal}},{"doneAny":${doneAny}},{"achivementDegrees":${achivementDegrees}}`);
+    res.redirect(301, `/${req.params.user}/record`);
 });
 
 // 管理画面

@@ -16,35 +16,35 @@ let userId = path[0];
 
 // logoを押下されたらhomeへ遷移
 headerLogoContainer.addEventListener('click', async () => {
-    (await fetch(`http://update.com/${userId}/home`)).json
+    window.location.href = `http://update.com/${userId}/home`
 });
 
 // naviの登録を押下されたらregisterへ遷移
 headerNaviRegisterBox.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    window.location.href = `http://update.com/${userId}/register`
 });
 
 // naviの記録を押下されたらrecordへ遷移
 headerNaviRecordBox.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    window.location.href = `http://update.com/${userId}/record`
 });
 
 // naviの管理を押下されたらmanageへ遷移
 headerNaviManageBox.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    window.location.href = `http://update.com/${userId}/manage`
 });
 
 // registerボタンを押下されたらregisterへ遷移
 homeRegisterButton.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    window.location.href = `http://update.com/${userId}/register`
 });
 
 // recordボタンを押下されたらrecordへ遷移
 homeRecordButton.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    window.location.href = `http://update.com/${userId}/record`
 });
 
 // manageボタンを押下されたらmanageへ遷移
 homeManageButton.addEventListener('click', async () => {
-    console.log("移動しますよ");
+    window.location.href = `http://update.com/${userId}/manage`
 });

@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
 
 // ログイン画面
 app.get('/login', (req, res) => {
-    res.send("This is login page !");
+    // res.send("This is login page !");
+    res.render("./view/pages/login.ejs");
 });
 
 // ログイン認証機能
@@ -61,7 +62,8 @@ app.post('/login/auth', (req, res) => {
 
 // ユーザの新規登録画面
 app.get('/addNewUser', (req, res) => {
-    res.send("This is newUser page!");
+    // res.send("This is newUser page!");
+    res.render("./view/pages/addNewUser.ejs");
 });
 
 // ユーザの新規登録機能
@@ -98,12 +100,14 @@ app.post('/addNewUser/add', (req, res) => {
 
 // ユーザのホーム画面
 app.get('/:user/home', (req, res) => {
-    res.send(`This is ${req.params.user} home page!`);
+    //res.send(`This is ${req.params.user} home page!`);
+    res.render("./view/pages/home.ejs");
 });
 
 // ユーザの登録画面
 app.get('/:user/register', (req, res) => {
-    res.send("This is register page !");
+    // res.send("This is register page !");
+    res.render("./view/pages/register.ejs");
 });
 
 // 登録機能
@@ -132,7 +136,8 @@ app.post('/:user/register/add', async (req, res) => {
 
 // 記録画面
 app.get('/:user/record', (req, res) => {
-    res.send("This is record page !");
+    res.render("./view/pages/record.ejs");
+    // res.send("This is record page !");
 });
 
 // 記録機能
@@ -176,9 +181,11 @@ app.get('/:user/manage', (req, res) => {
             client.close();
             // フィルターかけた結果をjsonで返す
             //res.send(`${resultsJson} `);
+            // 結果をもとにmanage.ejsをレンダリング
+            res.render("./view/pages/manage.ejs", resultsJson);
         });
     });
-    res.send("This is manage page !");
+    // res.send("This is manage page !");
 });
 
 // カテゴリ選択機能
@@ -198,7 +205,9 @@ app.post('/:user/manage/select', (req, res) => {
             let resultsJson = JSON.stringify(result);
             client.close();
             // フィルターかけた結果をjsonで返す
-            res.send(`${resultsJson} `);
+            // res.send(`${resultsJson} `);
+            // フィルターをかけた結果をもとにmanage.ejsを再レンダリング
+            res.render("./view/pages/manage.ejs", resultsJson);
         });
 
     });

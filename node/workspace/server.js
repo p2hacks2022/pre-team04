@@ -34,7 +34,6 @@ app.get('/login', (req, res) => {
 
 // ログイン認証機能
 app.post('/login/auth', (req, res) => {
-    console.log(req);
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', (err, client) => {
         // 接続できなければエラーを返す
         if (err) {
@@ -49,18 +48,18 @@ app.post('/login/auth', (req, res) => {
             .next(async (err, result) => {
                 if (err) throw err;
                 let loginUserId = req.body.userId;
-                console.log(req.body.userId);
-                console.log(loginUserId);
                 if (result) {
                     // exist
                     await client.close();
-                    let redirectPath = `${loginUserId}/home`;
-                    res.redirect(301, redirectPath);
+                    res.header('Content-Type', 'application/json; charset=utf-8');
+                    res.send(`{"message":"ユーザー「${loginUserId}」は存在します！"} `)
                 } else {
                     // not exist
+                    console.log("はいってねぇんだよ");
                     await client.close();
-                    res.header('Content-Type', 'application/json; charset=utf-8');
-                    res.send(`{"message":"ユーザー「${loginUserId}」は存在しません！"} `)
+                    // 存在しないユーザーを正しく拒絶できない
+                    let err = new Error('ユーザー「${loginUserId}」は存在しません！');
+                    res.send({ error: err });
                 }
             });
     });

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="/stylesheet/addNewUser.css">
     <title>upDate -addNewUser</title>
 </head>
 
@@ -21,7 +21,7 @@
                 <p class="add-new-user-form-text">
                     新規登録
                 </p>
-                <input class="add-new-user-form" type="text" name="userID" placeholder="ユーザーID">
+                <input class="add-new-user-form" id="userIdInputForm" type="text" name="userID" placeholder="ユーザーID">
             </div>
             <div class="add-new-user-button">
                 <p class="add-new-user-button-text">
@@ -35,7 +35,7 @@
         <!-- フッター -->
         <%- include('../components/footer'); %>
     </footer>
-
+    <script src="/script/addNewUser.js"></script>
 </body>
 
 </html>

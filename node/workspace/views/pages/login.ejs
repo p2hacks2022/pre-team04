@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="/stylesheet/login.css">
     <title>upDate -login</title>
 </head>
 
@@ -21,20 +21,20 @@
                 <p class="login-form-text">
                     ログイン
                 </p>
-                <input class="login-form" type="text" name="userID" placeholder="ユーザーID">
+                <input class="login-form" id="userIdInputForm" type="text" name="userID" placeholder="ユーザーID">
                 <div class="forgot-user-id">
-                    <p class="forgot-user-id-text">
+                    <p class="forgot-user-id-text" id="forgotUserIdButton">
                         ユーザーIDをお忘れの方はこちら
                     </p>
                 </div>
             </div>
-            <div class="login-button">
+            <div class="login-button" id="loginButton">
                 <p class="login-button-text">
                     ログイン
                 </p>
             </div>
             <div class="new-reistration">
-                <p class="new-reistration-text">
+                <p class="new-reistration-text" id="addNewUserButton">
                     新規登録はこちら
                 </p>
             </div>
@@ -45,7 +45,7 @@
         <!-- フッター -->
         <%- include('../components/footer'); %>
     </footer>
-
+    <script src="/script/login.js"></script>
 </body>
 
 </html>

@@ -22,8 +22,11 @@ getUserId.addEventListener('change', async () => {
             response.json()
                 .then((data) => {
                     console.log(data.message);
-                    alert(data.message);
+                    window.location.href = `http://update.com/${userId}/home`
                 })
+        })
+        .catch(error => {
+            alert(error);
         })
 });
 

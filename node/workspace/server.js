@@ -120,7 +120,9 @@ app.get('/:user/register', (req, res) => {
         await collection.distinct("category", (err, result) => {
             console.log(result);
             client.close();
-            res.render("pages/register.ejs"/*,result*/);
+            res.render("pages/register.ejs", {
+                category: result
+            });
         });
     });
 });
@@ -158,7 +160,9 @@ app.get('/:user/record', (req, res) => {
         await collection.distinct("goal", (err, result) => {
             console.log(result);
             client.close();
-            res.render("pages/record.ejs"/*,result*/);
+            res.render("pages/record.ejs", {
+                goal: result
+            });
         });
     });
     // res.send("This is record page !");
@@ -196,12 +200,14 @@ app.get('/:user/manage', (req, res) => {
         // 取得したドキュメントを配列としてJSON形式でレスポンスする
         cursole.toArray((err, result) => {
             if (err) throw err;
-            let resultsJson = JSON.stringify(result);
+            // let resultsJson = JSON.stringify(result);
             client.close();
             // フィルターかけた結果をjsonで返す
             //res.send(`${resultsJson} `);
             // 結果をもとにmanage.ejsをレンダリング
-            res.render("pages/manage.ejs"/*, resultsJson*/);
+            res.render("pages/manage.ejs", {
+                all: result
+            });
         });
     });
     // res.send("This is manage page !");

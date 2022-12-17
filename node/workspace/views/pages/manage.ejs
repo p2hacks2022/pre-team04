@@ -68,8 +68,13 @@
             </div>
         </div>
     </div>
-
-
+    <p>
+        <%all.forEach((result)= result=> { %>
+            <p>
+                <%= result.goal%>
+            </p>
+            <% }); %>
+    </p>
     <footer>
         <!-- フッター -->
         <%- include('../components/footer'); %>

@@ -27,7 +27,11 @@
         <form action="" method="POST">
             <div class="record-container">
                 <select class="record-target-box" id="recordTargetBox" name="goal">
-                    <option>目標を選択</option>
+                    <% goal.forEach(function(result) { %>
+                    <option result="<%= result%>">
+                        <%= result%>
+                    </option>
+                    <% });%>
                 </select>
                 <input class="done-any-form" id="doneAnyForm" type="text" name="doneAny" placeholder="なにかをした">
                 <select class="achievement-degrees-box" id="achievementDegreesBox" name="achievementDegrees">
@@ -59,7 +63,6 @@
             </p>
         </div>
     </div>
-
     <footer>
         <!-- フッター -->
         <%- include('../components/footer'); %>

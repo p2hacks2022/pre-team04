@@ -7,7 +7,6 @@
 }
 
 .header-logo-container {
-  background-color: #d9d9d9;
   width: 220px;
   height: 70px;
 }
@@ -129,7 +128,7 @@
   height: 60px;
 }
 
-.achievement-degrees-box {
+.achivement-degrees-box {
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   margin: auto;

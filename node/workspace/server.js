@@ -160,7 +160,7 @@ app.get('/:user/record', (req, res) => {
         const db = client.db('updateTest');
         let collection = db.collection(req.params.user);
         await collection.distinct("goal", (err, result) => {
-            console.log(result);
+            //console.log(result);
             client.close();
             res.render("pages/record.ejs", {
                 goal: result
@@ -176,6 +176,7 @@ app.post('/:user/record/add', (req, res) => {
     let goal = req.body.goal;
     let doneAny = req.body.doneAny;
     let achivementDegrees = req.body.achivementDegrees;
+    console.log(achivementDegrees);
     MongoClient.connect('mongodb://docker:docker@mongo:27017/', async (err, client) => {
         if (err) throw err;
         const db = client.db('updateTest');

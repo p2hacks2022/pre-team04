@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
 .register-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +14,16 @@
 .header-logo-container {
   background-color: #d9d9d9;
   width: 220px;
-  height: 70px;
+}
+
+.header-logo-container {
+  background-color: #d9d9d9;
+  width: 220px;
+}
+
+.header-logo {
+  width: 30%;
+  margin-left: 70px;
 }
 
 .header-navi-container {
@@ -83,6 +94,7 @@
 }
 
 .register-title {
+  font-family: 'Inter', sans-serif;
   color: #3d92c1;
   font-size: 96px;
   position: relative;
@@ -91,9 +103,11 @@
 }
 
 .register-title-text {
+  font-family: 'Inter', sans-serif;
   font-size: 32px;
+  white-space: nowrap;
   position: relative;
-  top: -140px;
+  top: -160px;
   left: -60px;
 }
 
@@ -103,6 +117,7 @@
 }
 
 .add-target-form {
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
   margin: auto;
   position: relative;
@@ -112,6 +127,7 @@
 }
 
 .add-category-form {
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
   margin: auto;
   position: relative;
@@ -121,6 +137,7 @@
 }
 
 .select-category-box {
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
   margin: auto;
   position: relative;
@@ -133,17 +150,18 @@
   background-color: #98d4f5;
   border-radius: 10px;
   margin: auto;
-  position: relative;
-  top: -20px;
-  width: 260px;
+  position: absolute;
+  top: 610px;
+  left: 850px;
   height: 70px;
 }
 
 .register-button-text {
+  font-family: 'Inter', sans-serif;
   color: #ffffff;
   font-size: 32px;
   position: relative;
-  top: 10px;
+  top: -20px;
   text-align: center;
 }
 
@@ -171,13 +189,14 @@
   border-radius: 10px;
   margin: auto;
   position: relative;
-  top: 40px;
+  top: 20px;
   left: 0px;
   width: 200px;
   height: 65px;
 }
 
 .back-home-button-text {
+  font-family: 'Inter', sans-serif;
   color: #244a53;
   font-size: 24px;
   position: relative;
@@ -196,13 +215,14 @@
   border-radius: 10px;
   margin: auto;
   position: relative;
-  top: 40px;
+  top: 20px;
   left: 0px;
   width: 200px;
   height: 65px;
 }
 
 .switch-manage-menu-button-text {
+  font-family: 'Inter', sans-serif;
   color: #744d29;
   font-size: 24px;
   position: relative;

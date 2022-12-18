@@ -21,8 +21,8 @@
                 登録
             </p>
             <p class="register-title-text">
-                いい感じの文章いい感じの文章<br>
-                いい感じの文章いい感じの文章
+                まずは目標を立てることが大事です！<br>
+                未来のなりたい自分を想像してみましょう！
             </p>
         </div>
         <form action="" method="POST">
@@ -32,10 +32,10 @@
                     placeholder="新しいカテゴリーを追加">
                 <select class="select-category-box" id="selectCategoryBox" name="selectCategory">
                     <% category.forEach(function(result) { %>
-                    <option result="<%= result%>">
-                        <%= result%>
-                    </option>
-                    <% });%>
+                        <option result="<%= result%>">
+                            <%= result%>
+                        </option>
+                        <% });%>
                 </select>
             </div>
             <button class="register-button" id="registerButton">

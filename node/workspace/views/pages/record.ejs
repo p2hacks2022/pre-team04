@@ -20,18 +20,18 @@
                 記録
             </p>
             <p class="record-title-text">
-                いい感じの文章いい感じの文章<br>
-                いい感じの文章いい感じの文章
+                少しの努力が未来を変える第一歩です！<br>
+                今すぐ記録しましょう！
             </p>
         </div>
         <form action="" method="POST">
             <div class="record-container">
                 <select class="record-target-box" id="recordTargetBox" name="goal">
                     <% goal.forEach(function(result) { %>
-                    <option result="<%= result%>">
-                        <%= result%>
-                    </option>
-                    <% });%>
+                        <option result="<%= result%>">
+                            <%= result%>
+                        </option>
+                        <% });%>
                 </select>
                 <input class="done-any-form" id="doneAnyForm" type="text" name="doneAny" placeholder="なにかをした">
                 <% var options=options ? options : []; var selected=selected ? selected : false; %>

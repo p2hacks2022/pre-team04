@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
 .header-wrapper {
   display: flex;
   width: auto;
@@ -8,6 +10,11 @@
   background-color: #d9d9d9;
   width: 220px;
   height: 70px;
+}
+
+.header-logo {
+  width: 30%;
+  margin-left: 70px;
 }
 
 .header-navi-container {
@@ -76,14 +83,17 @@
   font-size: 50px;
   left: 50%;
   margin-right: -50%;
+  text-align: centerS;
+  white-space: nowrap;
   position: relative;
   transform: translate(-50%, -25%);
   top: 50px;
-  width: 500px;
+  width: 780px;
   height: 60px;
 }
 
 .home-container {
+  font-family: 'Inter', sans-serif;
   display: flex;
   font-size: 40px;
   margin: 0 auto;
@@ -105,6 +115,7 @@
 }
 
 .register-button {
+  font-family: 'Inter', sans-serif;
   border: 5px solid;
   border-radius: 10px;
   color: #8dcedc;
@@ -112,6 +123,7 @@
   margin: 65px;
   width: 302px;
   height: 115px;
+  margin-top: 250px;
 }
 
 .register-button:hover {
@@ -138,6 +150,7 @@
 }
 
 .record-button {
+  font-family: 'Inter', sans-serif;
   border: 5px solid;
   border-radius: 10px;
   color: #c0d4ed;
@@ -145,6 +158,7 @@
   margin: 65px;
   width: 302px;
   height: 115px;
+  margin-top: 250px;
 }
 
 .record-button:hover {
@@ -171,6 +185,7 @@
 }
 
 .manage-button {
+  font-family: 'Inter', sans-serif;
   border: 5px solid;
   border-radius: 10px;
   color: #8494cd;
@@ -178,6 +193,7 @@
   margin: 65px;
   width: 302px;
   height: 115px;
+  margin-top: 250px;
 }
 
 .manage-button:hover {

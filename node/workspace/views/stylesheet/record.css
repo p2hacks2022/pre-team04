@@ -87,14 +87,14 @@
   font-size: 96px;
   position: relative;
   top: 10px;
-  left: -400px;
+  left: -200px;
 }
 
 .record-title-text {
   font-size: 32px;
   position: relative;
   top: -100px;
-  left: -290px;
+  left: -100px;
 }
 
 .record-target-box {
@@ -102,7 +102,7 @@
   margin: auto;
   position: relative;
   top: -30px;
-  left: -300px;
+  left: 0px;
   width: 353px;
   height: 60px;
 }
@@ -112,7 +112,7 @@
   margin: auto;
   position: relative;
   top: -10px;
-  left: -300px;
+  left: 0px;
   width: 345px;
   height: 60px;
 }
@@ -122,7 +122,7 @@
   margin: auto;
   position: relative;
   top: 10px;
-  left: -300px;
+  left: 0px;
   width: 353px;
   height: 60px;
 }
@@ -133,7 +133,7 @@
   margin: auto;
   position: relative;
   top: 40px;
-  left: -300px;
+  left: 0px;
   width: 260px;
   height: 70px;
 }
@@ -156,7 +156,7 @@
   display: flex;
   margin: auto;
   position: relative;
-  left: -300px;
+  left: 0px;
   width: 500px;
 }
 
@@ -208,16 +208,6 @@
   opacity: 0.8;
   transform: translate3d(0, 3px, 0);
   transition-duration: 0.3s;
-}
-
-.record-content-display-container {
-  background-color: #c6eaff;
-  margin: auto;
-  width: 575px;
-  height: 645px;
-  position: relative;
-  top: -570px;
-  left: 370px;
 }
 
 .footer-wrapper {

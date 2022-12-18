@@ -146,6 +146,8 @@ app.post('/:user/register/add', async (req, res) => {
             { $set: { "goal": goal, "category": category } },
             { upsert: true }
         );
+        //await collection.updateOne({}, { $pull: { doneAny: dummy } });
+        //await collection.updateOne({}, { $pull: { achivementDegrees: dummy } });
         await client.close();
     });
     res.redirect(301, `/${req.params.user}/register`);
@@ -227,6 +229,7 @@ app.post('/:user/manage/select', (req, res) => {
         cursole.toArray((err, result) => {
             if (err) throw err;
             let resultsJson = JSON.stringify(result);
+            console.log(resultsJson);
             client.close();
             // フィルターかけた結果をjsonで返す
             // res.send(`${resultsJson} `);

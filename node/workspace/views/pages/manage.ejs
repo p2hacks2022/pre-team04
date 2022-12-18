@@ -28,36 +28,17 @@
         </select>
         <div class="manage-container">
             <div class="manage-box">
-                <p class="manage-box-text">
-                    目標１
-                </p>
-            </div>
-            <div class="achievement-container">
-                <div class="achievement-degrees-box">
-                    <p class="achievement-degrees-text">
-                        達成度
+                <% for (let result in all){ %>
+                    <p class="manage-goal">
+                        <%= all[result].goal %>
                     </p>
-                    <progress class="achievement-degrees" id="achievementDegrees" max="100" value="70">
-                        達成度
-                    </progress>
-                </div>
-                <div class="record-box">
-                    <p class="record-box-text">
-                        記録
+                    <p class="manage-doneAny">
+                        <%= all[result].doneAny%>
                     </p>
-                    <div class="record-detail-box">
-                        <p class="record-text-date">
-                            〇月〇日
-                        </p>
-                        <p class="record-text-done-any">
-                            〇〇をした
-                        </p>
-                        <p class="achievement-degrees">
-                            達成度<br>
-                            〇〇%
-                        </p>
-                    </div>
-                </div>
+                    <p class="manage-achivementDegrees">
+                        <%= all[result].achivementDegrees%>
+                    </p>
+                    <% };%>
             </div>
         </div>
         <div class="switch-menu-container">
@@ -69,11 +50,7 @@
         </div>
     </div>
     <p>
-        <%all.forEach((result)= result=> { %>
-            <p>
-                <%= result.goal%>
-            </p>
-            <% }); %>
+
     </p>
     <footer>
         <!-- フッター -->
